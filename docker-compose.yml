@@ -1,0 +1,30 @@
+services:
+  app:
+    build: .
+    container_name: smartfinanceai_app
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DATABASE_URL=${DATABASE_URL}
+    depends_on:
+      - db
+    command: ["streamlit", "run", "src/app.py"]
+
+  db:
+    image: postgres:15
+    container_name: smartfinanceai_db
+    restart: always
+    environment:
+      POSTGRES_USER: smartfinance
+      POSTGRES_PASSWORD: smartfinance123
+      POSTGRES_DB: smartfinanceai
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Volume correto
+
+volumes:
+  postgres_data:  # Definição do volume no nível correto

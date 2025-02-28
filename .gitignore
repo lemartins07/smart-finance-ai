@@ -1,0 +1,66 @@
+# 🔹 Ignorar arquivos compilados do Python
+__pycache__/
+*.py[cod]
+*.so
+
+# 🔹 Ignorar logs e arquivos temporários
+*.log
+logs/
+*.out
+*.pid
+*.swp
+
+# 🔹 Ignorar pacotes e dependências locais
+venv/
+env/
+.idea/
+.vscode/
+*.DS_Store
+
+# 🔹 Ignorar arquivos de configuração do sistema
+*.ini
+*.cfg
+*.toml
+*.sqlite3
+
+# 🔹 Ignorar arquivos de ambiente
+.env
+.env.local
+.env.development
+.env.production
+
+# 🔹 Ignorar arquivos de cache do Streamlit
+.streamlit/config.toml
+.streamlit/secrets.toml
+
+# 🔹 Ignorar bancos de dados locais
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+
+# 🔹 Ignorar arquivos do Jupyter Notebook
+.ipynb_checkpoints
+
+# 🔹 Ignorar arquivos de saída do PyTest e cobertura de testes
+.coverage
+pytest_cache/
+htmlcov/
+
+# 🔹 Ignorar builds e distribuições do Python
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+
+# 🔹 Ignorar arquivos do Docker
+docker-compose.override.yml
+
+# 🔹 Ignorar arquivos do VSCode e PyCharm
+*.code-workspace
+*.iml
+.idea/
+.vscode/
+
+# 🔹 Ignorar arquivos temporários de edição
+*~
+*.bak
