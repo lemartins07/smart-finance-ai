@@ -1,8 +1,21 @@
-import psycopg2
+from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base, sessionmaker
 from config.settings import settings
 
-try:
-    conn = psycopg2.connect(settings.DATABASE_URL)
-    print("Conectado ao banco de dados com sucesso!")
-except Exception as e:
-    print("Erro ao conectar no banco:", e)
+# Definição da base de dados
+Base = declarative_base()
+
+# Criando a conexão com o PostgreSQL
+engine = create_engine(settings.DATABASE_URL, echo=True)
+
+# Criando a sessão do banco de dados
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+
+# Função para obter uma sessão do banco de dados
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
