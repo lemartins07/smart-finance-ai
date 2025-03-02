@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from infrastructure.database.database import Base
+from src.infrastructure.database.database import Base
 
 
 class Subcategory(Base):
@@ -11,4 +11,4 @@ class Subcategory(Base):
     category_id = Column(Integer, ForeignKey("categories.id"), nullable=False)
 
     category = relationship("Category", back_populates="subcategories")
-    transactions = relationship("Transaction", back_populates="subcategories")
+    transactions = relationship("Transaction", back_populates="subcategory")

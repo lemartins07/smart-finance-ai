@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, func
 from sqlalchemy.orm import relationship
-from infrastructure.database.database import Base
+from src.infrastructure.database.database import Base
 
 
 class Transaction(Base):
@@ -16,9 +16,10 @@ class Transaction(Base):
     installment_number = Column(
         Integer, nullable=False, default=1
     )  # Número da parcela atual
-    subcategory_id = Column(Integer, ForeignKey("subcategories.id"), nullable=False)
+    subcategory_id = Column(
+        Integer, ForeignKey("subcategories.id", ondelete="SET NULL"), nullable=True
+    )
     first_payment_date = Column(DateTime, nullable=False)  # Data da primeira cobrança
     created_at = Column(DateTime, server_default=func.now())
 
-
-subcategory = relationship("Subcategory", back_populates="transactions")
+    subcategory = relationship("Subcategory", back_populates="transactions")

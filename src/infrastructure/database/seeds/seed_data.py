@@ -1,7 +1,13 @@
+import sys
+import os
 from sqlalchemy.orm import Session
-from infrastructure.database import SessionLocal
-from models.category import Category
-from models.subcategory import Subcategory
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
+
+from src.infrastructure.database.database import SessionLocal
+from src.models.category import Category
+from src.models.subcategory import Subcategory
+from src.models.transaction import Transaction
 
 
 def seed_database():
