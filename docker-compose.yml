@@ -1,9 +1,11 @@
 services:
-  app:
-    build: .
-    container_name: smartfinanceai_app
+  backend:
+    build: 
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: smartfinanceai_backend
     ports:
-      - "8501:8501"
+      - "8000:8000"
     volumes:
       - .:/app
     environment:
@@ -11,8 +13,18 @@ services:
       - DATABASE_URL=${DATABASE_URL}
     depends_on:
       - db
-    command: ["streamlit", "run", "src/app.py"]
-
+  
+  frontend:
+    build: 
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: smartfinanceai_frontend
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
+    environment:
+      - API_URL=http://backend:8000
   db:
     image: postgres:15
     container_name: smartfinanceai_db
@@ -24,7 +36,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data  # Volume correto
+      - postgres_data:/var/lib/postgresql/data 
 
 volumes:
   postgres_data:  # Definição do volume no nível correto

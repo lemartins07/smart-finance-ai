@@ -1,0 +1,6 @@
+[client]
+showSidebarNavigation = false
+initialPage = "pages/dashboard.py"
+
+[server]
+headless = true

@@ -1,0 +1,11 @@
+python-dotenv
+openai
+pytesseract
+psycopg2-binary
+pdfplumber 
+pillow 
+PyMuPDF
+uvicorn
+fastapi 
+sqlalchemy
+pydantic

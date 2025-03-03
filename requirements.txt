@@ -1,8 +1,0 @@
-streamlit
-python-dotenv
-openai
-pytesseract
-psycopg2
-pdfplumber 
-pillow 
-PyMuPDF
