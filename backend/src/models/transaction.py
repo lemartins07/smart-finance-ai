@@ -1,26 +1,28 @@
 from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, func
 from sqlalchemy.orm import relationship
-from backend.src.infrastructure.database.database import Base
+from src.infrastructure.database.database import Base
 
 
 class Transaction(Base):
     __tablename__ = "transactions"
 
     id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(
+        Integer, ForeignKey("users.id"), nullable=False
+    )  # 🔹 Usuário dono da transação
     description = Column(String, nullable=False)
-    amount = Column(Float, nullable=False)  # Valor da parcela
-    total_amount = Column(Float, nullable=False)  # Valor total da compra
-    installments = Column(
-        Integer, nullable=False, default=1
-    )  # Número total de parcelas
-    installment_number = Column(
-        Integer, nullable=False, default=1
-    )  # Número da parcela atual
-    subcategory_id = Column(
-        Integer, ForeignKey("subcategories.id", ondelete="SET NULL"), nullable=True
-    )
-    # Data da primeira cobrança
-    first_payment_date = Column(DateTime, nullable=False)
+    amount = Column(Float, nullable=False)
+    transaction_type = Column(
+        String, nullable=False
+    )  # "entrada", "saida", "transferencia"
+    bank_account_id = Column(
+        Integer, ForeignKey("bank_accounts.id"), nullable=True
+    )  # Se pago com conta bancária
+    credit_card_id = Column(
+        Integer, ForeignKey("credit_cards.id"), nullable=True
+    )  # Se pago com cartão
     created_at = Column(DateTime, server_default=func.now())
 
-    subcategory = relationship("Subcategory", back_populates="transactions")
+    user = relationship("User")  # Relacionamento com o usuário
+    bank_account = relationship("BankAccount")
+    credit_card = relationship("CreditCard")

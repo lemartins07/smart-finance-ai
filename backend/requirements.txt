@@ -9,3 +9,5 @@ uvicorn
 fastapi 
 sqlalchemy
 pydantic
+alembic
+passlib

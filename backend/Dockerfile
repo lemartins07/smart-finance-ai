@@ -10,6 +10,9 @@ COPY backend/requirements.txt .
 # Instala as dependências
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Define o PYTHONPATH no container
+ENV PYTHONPATH=/app/backend
+
 # Copia o código do backend para dentro do container
 COPY backend/ .
 
@@ -17,5 +20,5 @@ COPY backend/ .
 EXPOSE 8000
 
 # Comando para iniciar o FastAPI com Uvicorn
-CMD ["python", "-m", "uvicorn", "backend.src.app:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["python", "-m", "uvicorn", "src.app:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
 

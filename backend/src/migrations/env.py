@@ -1,10 +1,20 @@
 from logging.config import fileConfig
 from sqlalchemy import engine_from_config, pool
 from alembic import context
+
+import sys
+import os
+
+# Adiciona o caminho correto ao PYTHONPATH
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+
 from src.infrastructure.database.database import Base
-from src.models.category import Category
-from src.models.subcategory import Subcategory
+from src.models.user import User
+from src.models.bank_account import BankAccount
+from src.models.credit_card import CreditCard
 from src.models.transaction import Transaction
+from src.models.institution import Institution
+from src.models.transfer import Transfer
 
 
 # this is the Alembic Config object, which provides
