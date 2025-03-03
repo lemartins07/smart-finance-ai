@@ -9,5 +9,6 @@ uvicorn
 fastapi 
 sqlalchemy
 pydantic
+pydantic[email]
 alembic
 passlib
